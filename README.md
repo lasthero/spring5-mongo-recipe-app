@@ -1,5 +1,10 @@
 [![CircleCI](https://circleci.com/gh/lasthero/spring5-mongo-recipe-app/tree/udemy-course.svg?style=svg)](https://circleci.com/gh/lasthero/spring5-mongo-recipe-app/tree/udemy-course)
 
+
+
+[![codecov](https://codecov.io/gh/lasthero/spring5-mongo-recipe-app/branch/master/graph/badge.svg)](https://codecov.io/gh/lasthero/spring5-mongo-recipe-app)
+
+
 # spring5-mongo-recipe-app
 Recipe Application Using MongoDB
 

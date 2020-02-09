@@ -1,17 +1,17 @@
 package guru.springframework.commands;
 
 import guru.springframework.domain.Difficulty;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * Created by jt on 6/21/17.

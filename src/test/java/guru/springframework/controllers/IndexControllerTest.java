@@ -2,6 +2,7 @@ package guru.springframework.controllers;
 
 import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeService;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Set;
+import reactor.core.publisher.Flux;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -54,16 +56,17 @@ public class IndexControllerTest {
 
         //given
         Set<Recipe> recipes = new HashSet<>();
-        recipes.add(new Recipe());
+        Recipe newRecipe = new Recipe();
+        recipes.add(newRecipe);
 
-        Recipe recipe = new Recipe();
-        recipe.setId("1");
+        Recipe recipe1 = new Recipe();
+        recipe1.setId("1");
 
-        recipes.add(recipe);
+        recipes.add(recipe1);
 
-        when(recipeService.getRecipes()).thenReturn(recipes);
+        when(recipeService.getRecipes()).thenReturn(Flux.just(recipe1, newRecipe));
 
-        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+        ArgumentCaptor<Flux<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Flux.class);
 
         //when
         String viewName = controller.getIndexPage(model);
@@ -73,8 +76,8 @@ public class IndexControllerTest {
         assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
-        Set<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2, setInController.size());
+        Flux<Recipe> listInController = argumentCaptor.getValue();
+        assertEquals(2, listInController.count().block().intValue());
     }
 
 }

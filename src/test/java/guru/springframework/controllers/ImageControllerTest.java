@@ -60,6 +60,8 @@ public class ImageControllerTest {
 
     @Test
     public void handleImagePost() throws Exception {
+
+        when(imageService.saveImageFile(anyString(), any())).thenReturn(Mono.empty());
         MockMultipartFile multipartFile =
                 new MockMultipartFile("imagefile", "testing.txt", "text/plain",
                         "Spring Framework Guru".getBytes());
